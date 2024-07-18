@@ -1,0 +1,87 @@
+3
+AP mode set to Track
+
+Compass heading  Autopilot course and mode
+
+before track selected (auto)
+84 F6 D4 59 42 00 FB 00 06 
+
+aftyer track selected
+84 36 D5 59 4A 00 FB 00 06 
+84 B6 D4 59 42 00 FC 80 06 
+84 B6 D4 59 42 00 FC 80 06 
+84 F6 D4 59 42 00 FB 80 06 
+
+After track confirmed
+84 36 D4 58 4A 00 FC 00 06 
+84 36 D4 58 4A 00 FC 00 06
+
+Waypoint definition
+9E FD 00 00 00 3B 98 02 12 41 86 30 30 30 31 11 
+9E FD 00 00 00 3B 98 02 12 41 86 30 30 30 31 11 
+9E FD 00 00 00 3B 98 02 12 41 86 30 30 30 31 11 
+9E FD 00 00 00 3B 98 02 12 41 86 30 30 30 31 11 
+
+???
+AC 22 01 00 DC 
+AC 22 01 00 DC 
+AC 22 01 00 DC 
+AC 22 01 00 DC 
+
+LAT/LON
+58 25 3B 18 E9 12 40 96 
+58 25 3B 18 E9 12 40 96 
+58 25 3B 18 E9 12 40 96 
+58 25 3B 18 E9 12 40 96 
+
+GPS and DGPS Info
+A5 57 D1 86 00 80 00 00 00 00 
+A5 57 D1 86 00 80 00 00 00 00 
+
+82  05  XX  xx YY yy ZZ zz   Target waypoint name
+82 05 00 FF 00 FF 04 FB 
+82 05 00 FF 00 FF 04 FB
+82 05 00 FF 00 FF 04 FB 
+82 05 00 FF 00 FF 04 FB 
+
+85  X6  XX  VU ZW ZZ YF 00 yf   Navigation to waypoint information
+85 06 00 8B 65 02 17 02 E8 
+85 06 00 8B 65 02 17 02 E8 
+85 06 00 8B 65 02 17 02 E8
+85 06 00 8B 65 02 17 02 E8
+
+Compass variation sent by ST40 compass instrument
+99 00 F9 
+99 00 F9 
+99 00 F9 
+99 00 F9 
+
+Compass heading rudder position
+9C F1 14 FC 
+9C F1 14 FC 
+9C F1 14 FC 
+9C F1 14 FC 
+
+83  07  XX  00  00  00  00  00  80  00  00  Sent by course computer.
+                 XX = 0 after clearing a failure condition, also sent once after power-up.
+                 XX = 1 failure, auto release error. Repeated once per second.
+                 XX = 8 failure, drive stopped.
+
+83 07 02 00 00 00 00 80 00 00 
+83 07 02 00 00 00 00 80 00 00
+83 07 02 00 00 00 00 80 00 00 
+
+sat info
+57 C0 01 
+57 C0 01 
+
+Track button
+86 01 03 FC 
+
+
+
+
+
+
+3
+AP mode set to Track

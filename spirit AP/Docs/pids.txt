@@ -1,0 +1,365 @@
+To control the rudder angle based on both TargetHeading and TargetTurnRate, you can design a composite PID controller that combines the two inputs to generate a single output. Here's a structured approach to achieving this:
+
+Step 1: Define the Control Objectives
+Heading Control: Ensure the boat is on the desired heading (TargetHeading).
+Turn Rate Control: Ensure the boat turns at the desired rate (TargetTurnRate).
+Step 2: Separate PID Controllers
+Heading PID Controller: To minimize the heading error.
+Turn Rate PID Controller: To minimize the turn rate error.
+Step 3: Combine the Outputs
+The final rudder angle (rudderAngle) can be computed by combining the outputs of the two PID controllers. One approach is to use a weighted sum of the outputs of both controllers.
+
+Step 4: Design the PID Controllers
+Heading PID Controller
+Error Calculation:
+�
+heading
+=
+TargetHeading
+−
+CurrentHeading
+e 
+heading
+​
+ =TargetHeading−CurrentHeading
+PID Calculation:
+�
+heading
+=
+�
+�
+heading
+×
+�
+heading
++
+�
+�
+heading
+×
+∫
+�
+heading
+ 
+�
+�
++
+�
+�
+heading
+×
+�
+�
+heading
+�
+�
+u 
+heading
+​
+ =K 
+p
+heading
+​
+ ×e 
+heading
+​
+ +K 
+i
+heading
+​
+ ×∫e 
+heading
+​
+ dt+K 
+d
+heading
+​
+ × 
+dt
+de 
+heading
+​
+ 
+​
+ 
+Turn Rate PID Controller
+Error Calculation:
+�
+turnrate
+=
+TargetTurnRate
+−
+CurrentTurnRate
+e 
+turnrate
+​
+ =TargetTurnRate−CurrentTurnRate
+PID Calculation:
+�
+turnrate
+=
+�
+�
+turnrate
+×
+�
+turnrate
++
+�
+�
+turnrate
+×
+∫
+�
+turnrate
+ 
+�
+�
++
+�
+�
+turnrate
+×
+�
+�
+turnrate
+�
+�
+u 
+turnrate
+​
+ =K 
+p
+turnrate
+​
+ ×e 
+turnrate
+​
+ +K 
+i
+turnrate
+​
+ ×∫e 
+turnrate
+​
+ dt+K 
+d
+turnrate
+​
+ × 
+dt
+de 
+turnrate
+​
+ 
+​
+ 
+Step 5: Combine the Controller Outputs
+You can combine the outputs using a weighted sum:
+rudderAngle
+=
+�
+heading
+×
+�
+heading
++
+�
+turnrate
+×
+�
+turnrate
+rudderAngle=w 
+heading
+​
+ ×u 
+heading
+​
+ +w 
+turnrate
+​
+ ×u 
+turnrate
+​
+ 
+where 
+�
+heading
+w 
+heading
+​
+  and 
+�
+turnrate
+w 
+turnrate
+​
+  are weights that determine the contribution of each controller.
+
+Step 6: Implement the Composite Controller
+Here's an outline of the implementation:
+
+Initialize Parameters:
+
+�
+�
+heading
+,
+�
+�
+heading
+,
+�
+�
+heading
+K 
+p
+heading
+​
+ ,K 
+i
+heading
+​
+ ,K 
+d
+heading
+​
+ 
+�
+�
+turnrate
+,
+�
+�
+turnrate
+,
+�
+�
+turnrate
+K 
+p
+turnrate
+​
+ ,K 
+i
+turnrate
+​
+ ,K 
+d
+turnrate
+​
+ 
+Weights 
+�
+heading
+,
+�
+turnrate
+w 
+heading
+​
+ ,w 
+turnrate
+​
+ 
+Compute Errors:
+
+�
+heading
+=
+TargetHeading
+−
+CurrentHeading
+e 
+heading
+​
+ =TargetHeading−CurrentHeading
+�
+turnrate
+=
+TargetTurnRate
+−
+CurrentTurnRate
+e 
+turnrate
+​
+ =TargetTurnRate−CurrentTurnRate
+PID Calculations:
+
+�
+heading
+=
+PID
+heading
+(
+�
+heading
+)
+u 
+heading
+​
+ =PID 
+heading
+​
+ (e 
+heading
+​
+ )
+�
+turnrate
+=
+PID
+turnrate
+(
+�
+turnrate
+)
+u 
+turnrate
+​
+ =PID 
+turnrate
+​
+ (e 
+turnrate
+​
+ )
+Combine Outputs:
+
+rudderAngle
+=
+�
+heading
+×
+�
+heading
++
+�
+turnrate
+×
+�
+turnrate
+rudderAngle=w 
+heading
+​
+ ×u 
+heading
+​
+ +w 
+turnrate
+​
+ ×u 
+turnrate
+​
+ 
+
+
+
+
+track nav
+wpposition
+current position
+xte
+
+
+targetHeading=
