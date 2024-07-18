@@ -24,11 +24,13 @@ typedef struct {
 void SystemTime(const tN2kMsg &N2kMsg);
 void Attitude(const tN2kMsg &N2kMsg);
 void Heading(const tN2kMsg &N2kMsg);
+void RateOfTurn(const tN2kMsg  &N2kMsg);
 
 tNMEA2000Handler NMEA2000Handlers[]={
   {126992L,&SystemTime},
   {127250L,&Heading},
   {127257L,&Attitude},
+  {127251L,&RateOfTurn},
   {0,0}
 };
 
@@ -450,6 +452,14 @@ template<typename T> void PrintLabelValWithConversionCheckUnDef(const char* labe
   if (AddLf) OutputStream->println();
 }
 
+/*
+Sent from Precision 9 compass:
+127250 Heading
+127251 Rate of turn
+127252 Heave
+127257 Attitude
+*/
+
 //*****************************************************************************
 void Attitude(const tN2kMsg &N2kMsg) {
     unsigned char SID;
@@ -489,7 +499,18 @@ void Heading(const tN2kMsg &N2kMsg) {
     }
 }
 
-
+//*****************************************************************************
+void RateOfTurn(const tN2kMsg &N2kMsg) {
+    unsigned char SID;
+    tN2kHeadingReference HeadingReference;
+    double RateOfTurn;
+    
+    if (ParseN2kRateOfTurn(N2kMsg,SID,RateOfTurn) ) {
+      autopilotdata.setTurnrate(RateOfTurn);
+    } else {
+      //OutputStream->print("Failed to parse PGN: "); OutputStream->println(N2kMsg.PGN);
+    }
+}
 
 //*****************************************************************************
 void SystemTime(const tN2kMsg &N2kMsg) {
@@ -498,8 +519,6 @@ void SystemTime(const tN2kMsg &N2kMsg) {
     double SystemTime;
     tN2kTimeSource TimeSource;
 
-  
-    
     if (ParseN2kSystemTime(N2kMsg,SID,SystemDate,SystemTime,TimeSource) ) {
       OutputStream->println("System time:");
       // PrintLabelValWithConversionCheckUnDef("  SID: ",SID,0,true);

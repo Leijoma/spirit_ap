@@ -20,6 +20,7 @@ class AutopilotData {
 
         void setMode(AutopilotMode mode);
         void setActualHeading(float heading);
+        void setTurnrate(float rot);
         void setTargetHeading(float heading);
         void setCrossTrackError(float xte);
         void setDistanceToWaypoint(float distance);
@@ -33,6 +34,7 @@ class AutopilotData {
 
         AutopilotMode getMode();
         float getActualHeading();
+        float getTurnrate();
         float getTargetHeading();
         float getCrossTrackError();
         float getDistanceToWaypoint();
@@ -49,6 +51,7 @@ class AutopilotData {
         AutopilotMode ap_mode;
         float targetHeading;
         float actualHeading;
+        float turnrate;
         float crossTrackError;
         float apparentWindAngle;
         Position currentPos;

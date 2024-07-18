@@ -25,6 +25,10 @@ AutopilotData::AutopilotData()
         void AutopilotData::setActualHeading(float heading){
             actualHeading=heading;
         }
+        void AutopilotData::setTurnrate(float rot){
+            turnrate=rot;
+        }
+        
         void AutopilotData::setTargetHeading(float heading){
             targetHeading=heading;
         }
@@ -66,6 +70,10 @@ AutopilotData::AutopilotData()
         float AutopilotData::getActualHeading(){
             return actualHeading;
         }
+        float AutopilotData::getTurnrate(){
+            return turnrate;
+        }
+
         float AutopilotData::getTargetHeading(){
             return targetHeading;
         }

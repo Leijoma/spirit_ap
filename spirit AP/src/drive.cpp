@@ -114,7 +114,9 @@ float RudderDriver::doDeadzoneTest(int step) {
         delay(200);
     }
     delay(2000);
+    ledcWrite(PWM_CHANNEL, _pwm_center * (65536 / 20000)); // Convert microseconds to duty cycle for 16-bit resolution
     pwm=_pwm_center;
+    delay(2000);
     while ((currentAngle>0) && (pwm>_pwm_min)) {    
         analogValue = analogRead(ad_pin);
         currentAngle=(analogValue-1735)*0.08;
@@ -129,6 +131,7 @@ float RudderDriver::doDeadzoneTest(int step) {
     }
     ledcWrite(PWM_CHANNEL, _pwm_center * (65536 / 20000)); // Convert microseconds to duty cycle for 16-bit resolution
     clutchDisengage();
+    return 0;
 }
 
 void  RudderDriver::update() {
